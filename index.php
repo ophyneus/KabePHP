@@ -1,5 +1,4 @@
 <?php
-  session_start();
   require("kabe.php");
 ?>
 <!DOCTYPE html>
@@ -9,6 +8,8 @@
   <title>Kabe</title>
 </head>
 <body>
-
+  <?php
+    echo $k1->html();
+  ?>
 </body>
 </html>
