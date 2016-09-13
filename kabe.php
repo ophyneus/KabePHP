@@ -20,16 +20,27 @@
           $stiil = "";
           if($this->laud[$rida][$veerg]!="."){
             $stiil.="background-color: lightgray;";
-          }else if($rida == $this->aktiivserida && $veerg == $this->aktiivseveerg){
-            $stiil.="color: red;";
+          }elseif($rida == $this->aktiivserida && $veerg == $this->aktiivseveerg){
+            $stiil.="font-size: 150%;";
           }
-          $t.="<td style='$stiil'>".$this->laud[$rida][$veerg]."</td>";
+          $lahter = "&nbsp;";
+          if(in_array($this->laud[$rida][$veerg], ["m", "v"])){
+            $lahter = "<a href='?rida=$rida&amp;veerg=$veerg'>".
+              $this->laud[$rida][$veerg]."</a>";
+          }
+          $t.="<td style='$stiil'>$lahter</td>";
         }
         $t.="</tr>";
       }
       $t.="</table>";
       return $t;
     }
+    function useURL(){
+      if(isSet($_REQUEST["rida"])){
+        $this->aktiivserida = intval($_REQUEST["rida"]);
+      }elseif(isSet($_REQUEST["veerg"])){
+        $this->aktiivseveerg = intval($_REQUEST["veerg"]);
+      }
+    }
   }
-  $k1 = new Kabe();
 ?>
