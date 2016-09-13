@@ -1,0 +1,9 @@
+Kabemäng
+
+* Mõtle välja andmestruktuur klassi sees kabeseisu talletamiseks (8x8 ja 3 rida nuppe)
+* Kuva olemasolev seis ekraanile (klassi vastava käsu abil)
+* Loo võimalus ühe nupu eraldi märkimiseks andmestruktuuris
+* Kuva see nupp ekraanil eristatuna
+* Nupule vajutamisel kuvatakse vastav nupp eristatuna
+* Tühjale lahtrile vajutades tõstetakse eristatud nupp sinna
+* Kumbagi värvi nupuga saab käia vaid diagonaalis edasi
