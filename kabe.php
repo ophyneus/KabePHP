@@ -20,7 +20,10 @@
           $stiil = "";
           if($this->laud[$rida][$veerg]!="."){
             $stiil.="background-color: lightgray;";
-          }elseif($rida == $this->aktiivserida && $veerg == $this->aktiivseveerg){
+          }
+          if($rida == $this->aktiivserida && $veerg == $this->aktiivseveerg){
+            echo $this->aktiivserida;
+            echo $this->aktiivseveerg;
             $stiil.="font-size: 150%;";
           }
           $lahter = "&nbsp;";
@@ -38,7 +41,8 @@
     function useURL(){
       if(isSet($_REQUEST["rida"])){
         $this->aktiivserida = intval($_REQUEST["rida"]);
-      }elseif(isSet($_REQUEST["veerg"])){
+      }
+      if(isSet($_REQUEST["veerg"])){
         $this->aktiivseveerg = intval($_REQUEST["veerg"]);
       }
     }
