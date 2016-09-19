@@ -12,6 +12,7 @@
 <body>
   <?php
     echo $k1->html();
+    echo $k1->andmedTekstina();
   ?>
 </body>
 </html>

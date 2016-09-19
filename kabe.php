@@ -46,5 +46,23 @@
         $this->aktiivseveerg = intval($_REQUEST["veerg"]);
       }
     }
+    function andmedTekstina(){
+      return json_encode(array(
+        "laud" => $this->laud, "aktiivnekoht" => [$this->aktiivserida, $this->aktiivseveerg]));
+    }
+    function andmedTekstist($tekst){
+      $abi = json_decode($tekst);
+      $this->laud = $abi->laud;
+      $this->aktiivserida = $abi->aktiivnekoht[0];
+      $this->aktiivseveerg = $abi->aktiivnekoht[1];
+    }
+    function salvestaSessiooni(){
+      $_SESSION("kabe") = andmedTekstina();
+    }
+    function loeSessioonist(){
+      if(isSet($_SESSION["kabe"])){
+        andmedTekstist($_SESSION["kabe"]);
+      }
+    }
   }
 ?>
