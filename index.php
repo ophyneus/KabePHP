@@ -1,18 +1,20 @@
 <?php
+  session_start();
   require("kabe.php");
-  $k1 = new Kabe();
-  $k1->useURL();
+  $k1=new Kabe();
+  $k1->loeSessioonist();
+  $k1->t88tleURL();
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Kabe</title>
-</head>
-<body>
-  <?php
-    echo $k1->html();
-    echo $k1->andmedTekstina();
-  ?>
-</body>
+<!doctype html>
+<html>
+  <head>
+    <title>Kabe</title>
+  </head>
+  <body>
+     <?php
+	   echo $k1->html();
+	   echo $k1->andmedTekstina();
+	 ?><br />
+	 <a href="?uusmang=jah">Uus mäng</a>
+  </body>
 </html>
