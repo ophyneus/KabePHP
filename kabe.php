@@ -50,50 +50,47 @@
 		  $t.="</table>";
 		  return $t;
 	  }
+    function jumpLogic($nupp){
+      if ($nupp == "m") {
+        if($this->laud[$this->aktiivserida-1][$this->aktiivseveerg-1] == "v"){
+          $this->laud[$this->aktiivserida-1][$this->aktiivseveerg-1]="r";
+        }else if($this->laud[$this->aktiivserida-1][$this->aktiivseveerg+1] == "v") {
+          $this->laud[$this->aktiivserida-1][$this->aktiivseveerg+1]="r";
+        }
+      }
+      if ($nupp == "v") {
+        if($this->laud[$this->aktiivserida+1][$this->aktiivseveerg+1] == "m"){
+          $this->laud[$this->aktiivserida+1][$this->aktiivseveerg+1]="r";
+        }else if($this->laud[$this->aktiivserida+1][$this->aktiivseveerg-1] == "m") {
+          $this->laud[$this->aktiivserida+1][$this->aktiivseveerg-1]="r";
+        }
+      }
+    }
+    function endTurn($uusrida, $uusveerg, $nupp){
+      $this->laud[$uusrida][$uusveerg]=$nupp;
+      $this->laud[$this->aktiivserida][$this->aktiivseveerg]="r";
+      $this->aktiivserida=-1;
+      $this->aktiivseveerg=-1;
+      $this->viimaneNupp=$nupp;
+    }
 	  function k2ik($uusrida, $uusveerg){
 		  $nupp=$this->laud[$this->aktiivserida][$this->aktiivseveerg];
       if($nupp == "m" && $this->viimaneNupp == "v" && $this->laud[$uusrida][$uusveerg] != "v" && $this->laud[$uusrida][$uusveerg] != "m" &&
         $this->aktiivserida - $uusrida == 1 && ($this->aktiivseveerg - $uusveerg == 1 || $this->aktiivseveerg - $uusveerg == -1)){
-            $this->laud[$uusrida][$uusveerg]=$nupp;
-            //echo $uusrida, $uusveerg, $nupp;
-            $this->laud[$this->aktiivserida][$this->aktiivseveerg]="r";
-            $this->aktiivserida=-1;
-            $this->aktiivseveerg=-1;
-            $this->viimaneNupp=$nupp;
+            $this->endTurn($uusrida, $uusveerg, $nupp);
       }else if($nupp == "v" && $this->viimaneNupp == "m" && $this->laud[$uusrida][$uusveerg] != "m" && $this->laud[$uusrida][$uusveerg] != "v" &&
          $this->aktiivserida - $uusrida == -1 && ($this->aktiivseveerg - $uusveerg == 1 || $this->aktiivseveerg - $uusveerg == -1)){
-            $this->laud[$uusrida][$uusveerg]=$nupp;
-            //echo $uusrida, $uusveerg, $nupp;
-            $this->laud[$this->aktiivserida][$this->aktiivseveerg]="r";
-            $this->aktiivserida=-1;
-            $this->aktiivseveerg=-1;
-            $this->viimaneNupp=$nupp;
-      }else if($nupp == "m" && $this->aktiivserida - $uusrida == 2 && $this->laud[$uusrida][$uusveerg] == "r" &&
+            $this->endTurn($uusrida, $uusveerg, $nupp);
+      }else if($nupp == "m" && $this->viimaneNupp == "v" && $this->aktiivserida - $uusrida == 2 && $this->laud[$uusrida][$uusveerg] == "r" &&
                 ($this->aktiivseveerg - $uusveerg == 2 || $this->aktiivseveerg - $uusveerg == -2) &&
                   ($this->laud[$this->aktiivserida-1][$this->aktiivseveerg+1] == "v" || $this->laud[$this->aktiivserida-1][$this->aktiivseveerg-1] == "v")) {
-                    if($this->laud[$this->aktiivserida-1][$this->aktiivseveerg-1] == "v"){
-                      $this->laud[$this->aktiivserida-1][$this->aktiivseveerg-1]="r";
-                    }else if($this->laud[$this->aktiivserida-1][$this->aktiivseveerg+1] == "v") {
-                      $this->laud[$this->aktiivserida-1][$this->aktiivseveerg+1]="r";
-                    }
-                    $this->laud[$uusrida][$uusveerg]=$nupp;
-                    $this->laud[$this->aktiivserida][$this->aktiivseveerg]="r";
-                    $this->aktiivserida=-1;
-                    $this->aktiivseveerg=-1;
-                    $this->viimaneNupp=$nupp;
-      }else if($nupp == "v" && $this->aktiivserida - $uusrida == -2 && $this->laud[$uusrida][$uusveerg] == "r" &&
+                    $this->jumpLogic($nupp);
+                    $this->endTurn($uusrida, $uusveerg, $nupp);
+      }else if($nupp == "v" && $this->viimaneNupp == "m" && $this->aktiivserida - $uusrida == -2 && $this->laud[$uusrida][$uusveerg] == "r" &&
                 ($this->aktiivseveerg - $uusveerg == -2 || $this->aktiivseveerg - $uusveerg == 2) &&
                   ($this->laud[$this->aktiivserida+1][$this->aktiivseveerg+1] == "m" || $this->laud[$this->aktiivserida+1][$this->aktiivseveerg-1] == "m")) {
-                    if($this->laud[$this->aktiivserida+1][$this->aktiivseveerg+1] == "m"){
-                      $this->laud[$this->aktiivserida+1][$this->aktiivseveerg+1]="r";
-                    }else if($this->laud[$this->aktiivserida+1][$this->aktiivseveerg-1] == "m") {
-                      $this->laud[$this->aktiivserida+1][$this->aktiivseveerg-1]="r";
-                    }
-                    $this->laud[$uusrida][$uusveerg]=$nupp;
-                    $this->laud[$this->aktiivserida][$this->aktiivseveerg]="r";
-                    $this->aktiivserida=-1;
-                    $this->aktiivseveerg=-1;
-                    $this->viimaneNupp=$nupp;
+                    $this->jumpLogic($nupp);
+                    $this->endTurn($uusrida, $uusveerg, $nupp);
       }else{
         $this->aktiivserida=-1;
         $this->aktiivseveerg=-1;
